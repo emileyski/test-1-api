@@ -36,7 +36,12 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
+
+# set up .env
+cp .env.example .env
+
+#for run database
+$ docker-compose up -d
 
 # watch mode
 $ npm run start:dev

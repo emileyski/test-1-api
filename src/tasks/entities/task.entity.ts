@@ -1,5 +1,6 @@
-import { TaskStatus } from 'src/core/enums';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { TaskStatusEnum } from 'src/core/enums';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { TaskStatus } from './task-status.entity';
 
 @Entity()
 export class Task {
@@ -13,11 +14,17 @@ export class Task {
   description?: string;
 
   @Column({ default: new Date() })
-  createdAt: Date;
+  start: Date;
+
+  @Column({ nullable: true })
+  end?: Date;
 
   @Column({ nullable: true })
   updatedAt?: Date;
 
-  @Column({ default: TaskStatus.OPEN, type: 'enum', enum: TaskStatus })
-  status: TaskStatus;
+  @Column({ default: TaskStatusEnum.OPEN, type: 'enum', enum: TaskStatusEnum })
+  status: TaskStatusEnum;
+
+  @OneToMany(() => TaskStatus, (status) => status.task, { cascade: true })
+  statuses: TaskStatus[];
 }
