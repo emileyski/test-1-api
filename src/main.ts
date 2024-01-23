@@ -34,7 +34,7 @@ async function bootstrap() {
 
   // Configure CORS
   app.enableCors({
-    origin: '5173', // Specify the origin of your React app
+    origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Enable credentials (cookies, authorization headers)
   });
